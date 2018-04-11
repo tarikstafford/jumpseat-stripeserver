@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/vapor/crypto.git",
         "state": {
           "branch": null,
-          "revision": "6a5d19f225583a1ca4327dd39fe2bd75ff222cd5",
+          "revision": "e77aa181580b466fb26865918b62973d9fbfaed6",
           "version": "3.0.0"
         }
       },
@@ -89,6 +89,15 @@
           "branch": null,
           "revision": "2a55a4e727584114aa6993903af09df9c771ae05",
           "version": "3.0.0-rc.2.2"
+        }
+      },
+      {
+        "package": "Stripe",
+        "repositoryURL": "https://github.com/vapor-community/stripe-provider.git",
+        "state": {
+          "branch": null,
+          "revision": "c614801fb6f6209bc688cfccb99beb705185c449",
+          "version": "2.0.2"
         }
       },
       {

@@ -1,5 +1,6 @@
-import FluentSQLite
 import Vapor
+import Stripe
+import FluentSQLite
 
 /// Called before your application initializes.
 ///
@@ -9,9 +10,12 @@ public func configure(
     _ env: inout Environment,
     _ services: inout Services
 ) throws {
-    /// Register providers first
-    try services.register(FluentSQLiteProvider())
-
+   
+    /// Register Stripe
+    let config = StripeConfig(apiKey: "sk_test_5dpKrN3gcInoD3Uo0eVWIn5u")
+    services.register(config)
+    try services.register(StripeProvider())
+    
     /// Register routes to the router
     let router = EngineRouter.default()
     try routes(router)
@@ -23,7 +27,7 @@ public func configure(
     middlewares.use(DateMiddleware.self) // Adds `Date` header to responses
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     services.register(middlewares)
-
+    
     // Configure a SQLite database
     let sqlite: SQLiteDatabase
     if env.isRelease {
@@ -33,15 +37,15 @@ public func configure(
         /// Create an in-memory SQLite database
         sqlite = try SQLiteDatabase(storage: .memory)
     }
-
+    
     /// Register the configured SQLite database to the database config.
     var databases = DatabaseConfig()
     databases.add(database: sqlite, as: .sqlite)
     services.register(databases)
-
+    
     /// Configure migrations
     var migrations = MigrationConfig()
-    migrations.add(model: Todo.self, database: .sqlite)
+    migrations.add(model: StripeUser.self, database: .sqlite)
     services.register(migrations)
 
 }
