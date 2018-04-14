@@ -14,18 +14,12 @@ final class StripeController {
         
         let stripeClient = try req.make(StripeClient.self)
         
-//        let futCust = try req.content.decode(StripeCustomer.self)
-        
         let input = try req.content.syncDecode(StripeCustomer.self)
         
         guard let email = input.email else { throw Abort(.badRequest, reason: "No Email Address")}
         
         let response = try stripeClient.customer.create(email: email)
-        
-//        return try futCust.flatMap(to: StripeCustomer.self, { customer in
-//            let response = try stripeClient.customer.create(email: customer.email)
-//            return response
-//        })
+    
         return response
     }
     
@@ -33,11 +27,19 @@ final class StripeController {
         
         let stripeClient = try req.make(StripeClient.self)
         
-        return try req.content.decode(StripeCustomer.self).flatMap(to: StripeEphemeralKey.self, { (customer) in
-            guard let customerId = customer.id else { throw Abort(.badRequest, reason: "No Customer Id")}
-            let response = try stripeClient.ephemeralKey.create(customer: customerId)
-            return response
-        })
+        let customer = try req.content.syncDecode(StripeCustomer.self)
+        
+         guard let customerId = customer.id else { throw Abort(.badRequest, reason: "No Customer Id")}
+        
+        let response = try stripeClient.ephemeralKey.create(customer: customerId)
+        
+        return response
+        
+//        return try req.content.decode(StripeCustomer.self).flatMap(to: StripeEphemeralKey.self, { (customer) in
+//            guard let customerId = customer.id else { throw Abort(.badRequest, reason: "No Customer Id")}
+//            let response = try stripeClient.ephemeralKey.create(customer: customerId)
+//            return response
+//        })
     }
 
     
