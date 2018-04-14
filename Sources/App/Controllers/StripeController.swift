@@ -39,6 +39,7 @@ final class StripeController {
             return response
         })
     }
+
     
     // Not required if you use the standard integration elements.
 //    func createCard(_ req: Request) throws -> Future<StripeToken> {
@@ -57,5 +58,34 @@ final class StripeController {
 //        return response
 //    }
     
+    func getCustomer(_ req: Request) throws -> Future<StripeCustomer> {
+        
+        let stripeClient = try req.make(StripeClient.self)
+        
+        let input = try req.content.syncDecode(StripeCustomer.self)
+        
+        guard let customerId = input.id else { throw Abort(.badRequest, reason: "No Customer Id")}
+        
+        let response = try stripeClient.customer.retrieve(customer: customerId)
+        
+        return response
+    }
+    
+    func createCharge(_ req: Request) throws -> Future<StripeCharge> {
+        
+        let stripeClient = try req.make(StripeClient.self)
+        
+        let input = try req.content.syncDecode(StripeCharge.self)
+        
+        let customer = try req.content.syncDecode(StripeCustomer.self)
+        
+        guard let amount = input.amount else { throw Abort(.badRequest, reason: "No Amount")}
+        
+        guard let currency = input.currency else { throw Abort(.badRequest, reason: "No Currency")}
+        
+        guard let id = customer.id else {throw Abort(.badRequest, reason: "No Customer")}
+        
+        return try stripeClient.charge.create(amount: amount, currency: currency, customer: id)
+    }
     
 }

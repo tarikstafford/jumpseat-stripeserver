@@ -8,6 +8,8 @@ public func routes(_ router: Router) throws {
     
     let stripeController = StripeController()
     router.post("createCustomer",use: stripeController.createCustomerId)
-    router.post("ephKey", use: stripeController.getEphemeralKey)
+    router.post("ephemeral_keys", use: stripeController.getEphemeralKey)
+    router.post("getCustomer", use: stripeController.getCustomer)
+    router.post("charge", use: stripeController.createCharge)
     //router.post("createCard", use: stripeController.createCard)
 }
