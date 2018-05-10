@@ -8,14 +8,14 @@
 import Vapor
 import Stripe
 
-//final class StripeConnectController {
-//    
-//    func createConnectedAccount(_ req: Request) throws -> Future<StripeConnectAccount> {
-//        
-//        let stripeClient = try req.make(StripeClient.self)
-//        
-//        let inputAccount = try req.content.syncDecode(StripeConnectAccount)
-//        
-//    }
-//    
-//}
+final class StripeConnectController {
+    
+    func createConnectedAccount(_ req: Request) throws -> Future<StripeConnectAccount> {
+        
+        let stripeClient = try req.make(StripeClient.self)
+        
+        let inputAccount = try req.content.syncDecode(StripeConnectAccount)
+        
+    }
+    
+}
