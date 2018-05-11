@@ -29,7 +29,7 @@ final class StripeController {
         
         let customer = try req.content.syncDecode(StripeCustomer.self)
         
-         guard let customerId = customer.id else { throw Abort(.badRequest, reason: "No Customer Id")}
+        guard let customerId = customer.id else { throw Abort(.badRequest, reason: "No Customer Id")}
         
         let response = try stripeClient.ephemeralKey.create(customer: customerId)
         

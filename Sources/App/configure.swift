@@ -11,7 +11,7 @@ public func configure(
 ) throws {
    
     /// Register Stripe
-    let config = StripeConfig(apiKey: "sk_test_5dpKrN3gcInoD3Uo0eVWIn5u")
+    let config = StripeConfig(productionKey: "sk_test_5dpKrN3gcInoD3Uo0eVWIn5u", testKey: "sk_test_5dpKrN3gcInoD3Uo0eVWIn5u")
     services.register(config)
     try services.register(StripeProvider())
     
@@ -19,12 +19,5 @@ public func configure(
     let router = EngineRouter.default()
     try routes(router)
     services.register(router, as: Router.self)
-
-    /// Register middleware
-    var middlewares = MiddlewareConfig() // Create _empty_ middleware config
-    /// middlewares.use(FileMiddleware.self) // Serves files from `Public/` directory
-    middlewares.use(DateMiddleware.self) // Adds `Date` header to responses
-    middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
-    services.register(middlewares)
 
 }
