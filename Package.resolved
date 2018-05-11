@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/vapor-community/stripe-provider.git",
         "state": {
           "branch": null,
-          "revision": "92481e49aeb97d5f2e0e7da14dae2c167c459dba",
-          "version": "2.0.5"
+          "revision": "cdeb5dad232a07718d02ab69b40e40bfeb0aa32e",
+          "version": "2.0.6"
         }
       },
       {

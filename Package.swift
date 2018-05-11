@@ -8,7 +8,7 @@ let package = Package(
         .package(url: "https://github.com/vapor/vapor.git", from: "3.0.0"),
 
         // Stripe Package
-        .package(url: "https://github.com/vapor-community/stripe-provider.git", from: "2.0.0")
+        .package(url: "https://github.com/vapor-community/stripe-provider.git", from: "2.0.2")
     ],
     targets: [
         .target(name: "App", dependencies: ["Vapor", "Stripe"]),
