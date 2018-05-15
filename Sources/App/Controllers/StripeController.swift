@@ -66,4 +66,10 @@ final class StripeController {
         return try stripeClient.charge.create(amount: amount, currency: currency, customer: id)
     }
     
+//    func submitToken(_ req: Request) throws -> Future<StripeToken> {
+//        
+//        let stripeClient = try req.make(StripeClient.self)
+//        
+//    }
+//    
 }

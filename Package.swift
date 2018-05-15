@@ -14,7 +14,7 @@ let package = Package(
         .package(url: "https://github.com/vapor-community/stripe-provider.git", from: "2.0.0")
     ],
     targets: [
-        .target(name: "App", dependencies: ["Vapor", "Stripe"]),
+        .target(name: "App", dependencies: ["FluentSQLite", "Vapor", "Stripe"]),
         .target(name: "Run", dependencies: ["App"]),
         .testTarget(name: "AppTests", dependencies: ["App"])
     ]
